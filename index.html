@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>BallasNet – PC Oyun Vitrini | Indie & Düşük Sistem</title>
+  <meta name="description" content="BallasNet’te Türkçe içerikli indie, düşük sistem ve popüler PC oyunlarını ücretsiz keşfet. Hemen oyna, çekilişe katıl!">
+  <meta name="keywords" content="indie oyunlar, düşük sistem oyunları, ücretsiz pc oyunları, oyun vitrini, ballasnet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://ballasnet.github.io/">
+  <meta property="og:title" content="BallasNet – PC Oyun Vitrini">
+  <meta property="og:description" content="Indie, düşük sistem ve popüler PC oyunları tek tıkla. Çekilişlere katıl, yeni oyunlar keşfet!">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ballasnet.github.io/">
+  <meta property="og:image" content="https://ballasnet.github.io/hero.jpg">
+  <meta property="og:locale" content="tr_TR">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <style>
+    /* –– SEO: CLS & LCP düşürme –– */
+    .game-image img, .giveaway-image, .hero-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #111;
+    }
+    .game-image {
+      height: 130px;
+      background: #000 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23000'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23333' font-size='10'%3EYükleniyor...%3C/text%3E%3C/svg%3E") center no-repeat;
+    }
+    /* –– Diğer stiller aynı –– */
+    *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif;}
+    body{background:#0b0b0b;color:#fff;}
+    h1{position:absolute;left:-9999px;}
+    a{color:#fff;text-decoration:none;}
+    .search-box{display:flex;max-width:640px;margin:0 auto;border:1px solid #222;background:#000;position:relative;}
+    .search-box input{flex:1;padding:12px;background:#000;border:none;color:#fff;}
+    .search-box button{padding:12px 22px;background:#0f0f0f;color:#bbb;border-left:1px solid #222;cursor:pointer;}
+    .search-suggestions{position:absolute;top:100%;left:0;width:100%;background:#111;color:#fff;max-height:200px;overflow-y:auto;border:1px solid #222;display:none;z-index:10;}
+    .search-suggestions div{padding:6px 12px;cursor:pointer;}
+    .search-suggestions div:hover{background:#222;}
+    .hero{max-width:1000px;margin:24px auto;padding:14px;background:#0f0f0f;border:1px solid #222;}
+    .hero-image{width:100%;height:220px;background:url("hero.jpg") center/cover no-repeat;margin-bottom:8px;}
+    .hero-tags{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;font-size:13px;letter-spacing:2px;margin-bottom:10px;}
+    .hero-tags a{color:#aaa;}
+    .section{max-width:1200px;margin:60px auto;}
+    .section.giveaway-section{max-width:1300px;}
+    .section > h2{padding:0 20px;}
+    .section h2{font-size:15px;letter-spacing:3px;margin-bottom:22px;border-bottom:1px solid #222;padding-bottom:10px;}
+    .slider-wrapper{position:relative;overflow:hidden;margin-bottom:40px;}
+    .giveaway-section .slider-wrapper{overflow:visible;}
+    .slider{display:flex;}
+    .slider > a{margin-right:26px;}
+    .slider{will-change:transform;}
+    .slider .game{flex-shrink:0;width:320px;height:200px;display:flex;flex-direction:column;padding:8px;background:#0f0f0f;border:1px solid #222;}
+    .game-title{margin-top:6px;font-size:15px;}
+    .game-tags-container{display:flex;gap:4px;margin-top:2px;}
+    .game-tag{font-size:12px;color:#888;background:#111;padding:4px 8px;}
+    .slider-btn{position:absolute;top:50%;transform:translateY(-50%);background:#000;color:#fff;border:1px solid #222;font-size:24px;padding:6px 12px;cursor:pointer;z-index:10;}
+    .slider-btn.left{left:10px;}
+    .slider-btn.right{right:10px;}
+    .dusuk-section{margin-top:60px;}
+    .mozaik-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:150px;gap:12px;}
+    .mozaik-card{position:relative;overflow:hidden;background:#0f0f0f;border:1px solid #222;cursor:pointer;transition:transform .25s ease,box-shadow .25s ease;will-change:transform;isolation:isolate;}
+    .mozaik-card:hover{transform:scale(1.04);box-shadow:0 0 0 1px #333,0 6px 18px rgba(0,0,0,.55);}
+    .mozaik-title{position:absolute;bottom:0;left:0;right:0;padding:6px 8px;background:rgba(0,0,0,.7);font-size:13px;text-align:center;color:#fff;}
+    .mozaik-card.kare{grid-column:span 1;grid-row:span 1;}
+    .mozaik-card.dikdortgen{grid-column:span 2;grid-row:span 1;}
+    .indie-wrapper,.indie-wrapper .slider,.indie-wrapper .shuffle-indie{width:100%;max-width:none;transform:none;scale:1;}
+    .section .slider-wrapper{padding-left:0;padding-right:0;}
+    .haftanin-oyunu-section{max-width:1200px;margin:40px auto;padding:0 20px;}
+    .haftanin-oyunu-container{display:flex;align-items:center;gap:20px;}
+    .wheel{width:150px;height:150px;background:#111;border:2px solid #222;display:flex;justify-content:center;align-items:center;overflow:hidden;border-radius:8px;position:relative;z-index:1;}
+    .wheel img{width:110%;height:110%;object-fit:cover;transition:transform .2s ease;}
+    .wheel:hover img{transform:scale(.95);}
+    .haftanin-oyunu{flex:1;height:150px;background:#0f0f0f;border:2px solid #222;display:flex;justify-content:center;align-items:center;}
+    .haftanin-oyunu img{width:100%;height:100%;object-fit:cover;transition:transform .25s ease;}
+    .haftanin-oyunu:hover img{transform:scale(1.004);}
+    .cekilis{width:200px;height:150px;background:#111;border:2px solid #222;display:flex;justify-content:center;align-items:center;overflow:hidden;}
+    .cekilis img{width:110%;height:110%;object-fit:cover;transition:transform .2s ease;}
+    .cekilis:hover img{transform:scale(.95);}
+    .random-link,.cekilis{cursor:pointer;}
+    .masa-panel{position:relative;max-width:1300px;margin:80px auto;padding:40px;background:#111;border:3px solid #222;border-radius:14px;box-shadow:inset 0 0 0 2px #000,0 30px 80px rgba(0,0,0,.75);}
+    .masa-overlay{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:4;}
+    .snow{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:hidden;z-index:5;}
+    .snowflake{position:absolute;top:-10px;width:8px;height:8px;background:white;border-radius:50%;opacity:.8;pointer-events:none;}
+    #theme-toggle{position:absolute;top:40px;right:30px;width:50px;height:50px;border-radius:50%;background:#222;color:#fff;font-size:24px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:999;box-shadow:0 0 10px rgba(0,0,0,.5);transition:all .3s ease;}
+    #theme-toggle:hover{transform:scale(1.1);box-shadow:0 0 15px rgba(255,255,255,.7);}
+    body.dark{background:#111;color:#fff;}
+    body:not(.dark){background:#F5FEFD;color:#111;}
+    body:not(.dark) .section h2{color:#111;}
+    .site-footer{margin:30px 0;padding:14px 10px;text-align:center;font-size:13px;letter-spacing:.5px;color:#777;border-top:1px solid rgba(255,255,255,.05);}
+    .giveaway-cards{display:flex;gap:18px;flex-wrap:nowrap;width:100%;}
+    .giveaway-card{flex:0 0 220px;max-width:220px;min-width:220px;background:#141414;border-radius:16px;overflow:hidden;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease;}
+    .giveaway-card:hover{transform:translateY(-4px) scale(1.03);box-shadow:0 10px 30px rgba(0,0,0,.6);}
+    .giveaway-image{height:130px;background-size:cover;background-position:center;}
+    .giveaway-info{padding:12px;}
+    .giveaway-info h3{font-size:14px;margin-bottom:4px;}
+    .giveaway-info p{font-size:13px;opacity:.9;}
+    .giveaway-info span{display:block;margin-top:6px;font-size:11px;opacity:.6;}
+    .giveaway-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:9999;}
+    .giveaway-overlay video{max-width:80%;max-height:80%;border-radius:16px;}
+    .alert-msg{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(.8);background:rgba(0,0,0,.85);color:#0ff;padding:18px 28px;font-size:18px;font-weight:bold;border-radius:12px;text-align:center;opacity:0;pointer-events:none;transition:opacity .5s ease,transform .5s ease;z-index:9999;}
+    .alert-msg.show{opacity:1;transform:translate(-50%,-50%) scale(1);}
+    .alert-msg.hide{opacity:0;transform:translate(-50%,-50%) scale(.8);}
+  </style>
+</head>
+<body class="dark">
+  <h1 class="visually-hidden">BallasNet – Ücretsiz PC Oyun Vitrini</h1>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-image" role="img" aria-label="Hero görsel"></div>
+      <nav class="hero-tags" aria-label="Hızlı filtreler">
+        <a href="#populer">POPÜLER</a>
+        <a href="#dusuk">DÜŞÜK SİSTEM</a>
+        <a href="#indie">İNDİE</a>
+      </nav>
+      <div class="search-box">
+        <label for="searchInput" class="visually-hidden">Oyun ara</label>
+        <input id="searchInput" type="search" placeholder="Oyun ara..." autocomplete="off">
+        <button type="button">ARA</button>
+        <div class="search-suggestions" role="listbox"></div>
+      </div>
+    </section>
+
+    <!-- Popüler Oyunlar -->
+    <section id="populer" class="section" aria-labelledby="populer-heading">
+      <h2 id="populer-heading">POPÜLER OYUNLAR</h2>
+      <div class="slider-wrapper">
+        <button class="slider-btn left" aria-label="Önceki oyunlar">&#10094;</button>
+        <button class="slider-btn right" aria-label="Sonraki oyunlar">&#10095;</button>
+        <div class="slider shuffle-populer" data-lazy="true"></div>
+      </div>
+    </section>
+
+    <!-- Mozaik -->
+    <section class="section" aria-labelledby="indie-heading">
+      <h2 id="indie-heading">İNDİE VİTRİNİ</h2>
+      <div class="mozaik-grid">
+        <!-- mozaik kartlar -->
+      </div>
+    </section>
+
+    <!-- Düşük Sistem -->
+    <section id="dusuk" class="dusuk-section" aria-labelledby="dusuk-heading">
+      <h2 id="dusuk-heading">DÜŞÜK SİSTEM GEREKTİREN OYUNLAR</h2>
+      <div class="slider-wrapper dusuk-wrapper">
+        <button class="slider-btn left" aria-label="Önceki">&#10094;</button>
+        <button class="slider-btn right" aria-label="Sonraki">&#10095;</button>
+        <div class="slider shuffle-dusuk" data-lazy="true"></div>
+      </div>
+    </section>
+
+    <!-- Indie Slider -->
+    <section id="indie" class="section dusuk-section" aria-labelledby="indie2-heading">
+      <h2 id="indie2-heading">İNDİE OYUNLAR</h2>
+      <div class="slider-wrapper indie-wrapper">
+        <button class="slider-btn left" aria-label="Önceki">&#10094;</button>
+        <button class="slider-btn right" aria-label="Sonraki">&#10095;</button>
+        <div class="slider shuffle-indie" data-lazy="true"></div>
+      </div>
+    </section>
+
+    <!-- Çekiliş -->
+    <section class="giveaway-section" aria-labelledby="giveaway-heading">
+      <h2 id="giveaway-heading" class="section-title">ÇEKİLİŞLER</h2>
+      <div class="giveaway-cards" role="list"></div>
+    </section>
+
+    <!-- Masa -->
+    <section class="haftanin-oyunu-section" aria-label="Haftanın oyunu ve çekiliş">
+      <div class="masa-panel">
+        <div class="masa-overlay">
+          <div class="snow" aria-hidden="true"></div>
+        </div>
+        <div class="haftanin-oyunu-container">
+          <a class="wheel random-link" href="#" aria-label="Rastgele oyun oyna"><img src="random.png" alt="Random Oyna"></a>
+          <a href="https://ballasnet.github.io/" class="haftanin-oyunu"><img src="keudea.jpg" alt="Haftanın Oyunu"></a>
+          <a href="https://www.youtube.com/watch?v=YVkUvmDQ3HY" class="cekilis single-link"><img src="cekilis2.jpg" alt="Çekiliş"></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2025 BallasNet – Orjinal Sitemiz</p>
+  </footer>
+
+  <div id="theme-toggle" aria-label="Tema değiştir">☀️</div>
+  <div id="alert-msg" class="alert-msg" role="alert"></div>
+
+  <script>
+    /* –– LAZYLOAD: artık gerçekten çalışıyor –– */
+    const allGames = [
+      {title:"Terraria",slug:"terraria",image:"terraria.jpg",tags:["Indie","Düşük Sistem"]},
+      {title:"Stardew Valley",slug:"stardew-valley",image:"stardewvalley.jpg",tags:["Indie","Düşük Sistem"]},
+      {title:"Celeste",slug:"celeste",image:"celeste2.jpg",tags:["Indie","Düşük Sistem"]},
+      {title:"Baba Is You",slug:"baba-is-you",image:"babaisyou.jpg",tags:["Indie","Düşük Sistem"]}
+    ];
+    const smallGames = [
+      {title:"Papers, Please",slug:"papers-please",image:"papersplease2.jpg"},
+      {title:"Baba Is You",slug:"baba-is-you",image:"babaisyou.jpg"},
+      {title:"Undertale",slug:"undertale",image:"undertale.jpg"},
+      {title:"Stardew Valley",slug:"stardew-valley",image:"stardewvalley.jpg"}
+    ];
+    const largeGames = [
+      {title:"Celeste",slug:"celeste",image:"celeste2.jpg"},
+      {title:"Hollow Knight",slug:"hollow-knight",image:"hollow-knight.jpg"}
+    ];
+
+    function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}}
+
+    /* –– LAZYLOAD: sadece görünür kart –– */
+    function loadVisible(slider){
+      const wrap=slider.parentElement;
+      const x=Math.abs(parseInt(slider.style.transform.replace(/[^\d-]/g,'')))||0;
+      const w=wrap.clientWidth;
+      const card=346;
+      const start=Math.floor(x/card);
+      const end=Math.ceil((x+w)/card)+1;
+      slider.querySelectorAll('img').forEach((img,i)=>{
+        if(i>=start-1&&i<=end&&img.dataset.src){
+          img.src=img.dataset.src;
+          delete img.dataset.src;
+        }
+      });
+    }
+
+    function initSlider(sel,games){
+      const wrap=document.querySelector(sel);
+      const slider=wrap.querySelector('.slider');
+      const left=wrap.querySelector('.left');
+      const right=wrap.querySelector('.right');
+      slider.innerHTML='';
+      games.forEach(g=>{
+        const a=document.createElement('a'); a.href=g.slug+'.html';
+        a.innerHTML=`<div class="game"><div class="game-image"><img data-src="${g.image}" alt="${g.title}" loading="lazy"></div><div class="game-title">${g.title}</div><div class="game-tags-container">${g.tags?t=>t.map(c=>`<div class="game-tag">${c}</div>`).join(''):''}</div></div>`;
+        slider.appendChild(a);
+      });
+      let idx=0;
+      function upd(){
+        slider.style.transform=`translateX(${-idx*346}px)`;
+        loadVisible(slider);
+      }
+      right.onclick=()=>{if(idx<slider.children.length-1){idx++;upd();}};
+      left.onclick=()=>{if(idx>0){idx--;upd();}};
+      upd();
+    }
+
+    document.addEventListener('DOMContentLoaded',()=>{
+      shuffle(allGames); initSlider('.indie-wrapper',allGames);
+      const dusuk=allGames.filter(g=>g.tags.includes('Düşük Sistem'));
+      initSlider('.dusuk-wrapper',dusuk);
+
+      /* popüler slider HTML’den */
+      const pop=[...document.querySelectorAll('.shuffle-populer a')].map(a=>{
+        const img=a.querySelector('img');
+        img.dataset.src=img.src; img.src=''; /* lazy */
+        return {
+          title:a.querySelector('.game-title').textContent,
+          slug:a.href.split('/').pop().replace('.html',''),
+          image:img.dataset.src,
+          tags:[...a.querySelectorAll('.game-tag')].map(t=>t.textContent)
+        };
+      });
+      shuffle(pop);
+      const popWrap=document.querySelector('.shuffle-populer');
+      popWrap.innerHTML='';
+      pop.forEach(g=>{
+        const a=document.createElement('a'); a.href=g.slug+'.html';
+        a.innerHTML=`<div class="game"><div class="game-image"><img data-src="${g.image}" alt="${g.title}" loading="lazy"></div><div class="game-title">${g.title}</div><div class="game-tags-container">${g.tags.map(t=>`<div class="game-tag">${t}</div>`).join('')}</div></div>`;
+        popWrap.appendChild(a);
+      });
+      initSlider('.shuffle-populer').parentElement.parentElement,pop);
+
+      /* mozaik */
+      const mozMap={...smallGames,...largeGames};
+      document.querySelectorAll('.mozaik-card').forEach(c=>{
+        const s=c.dataset.slug;
+        const g=mozMap[s];
+        if(g){c.querySelector('img').src=g.image;c.querySelector('img').alt=g.title;c.querySelector('.mozaik-title').textContent=g.title;c.onclick=()=>location.href=s+'.html';}
+      });
+
+      /* tema */
+      const tgl=document.getElementById('theme-toggle');
+      document.body.classList.toggle('dark',localStorage.getItem('theme')!=='light');
+      tgl.textContent=document.body.classList.contains('dark')?'☀️':'🌙';
+      tgl.onclick=()=>{
+        document.body.classList.toggle('dark');
+        localStorage.setItem('theme',document.body.classList.contains('dark')?'dark':'light');
+        tgl.textContent=document.body.classList.contains('dark')?'☀️':'🌙';
+      };
+
+      /* snow */
+      const snow=document.querySelector('.snow');
+      if(snow){
+        for(let i=0;i<40;i++){
+          const f=document.createElement('div');f.className='snowflake';
+          f.style.width=f.style.height=4+Math.random()*6+'px';
+          f.style.left=Math.random()*100+'%';
+          f.style.animationDuration=3+Math.random()*4+'s';
+          snow.appendChild(f);
+        }
+      }
+
+      /* çekiliş overlay */
+      const overlay=document.getElementById('giveawayOverlay');
+      const video=document.getElementById('giveawayVideo');
+      document.querySelectorAll('.giveaway-card').forEach(c=>{
+        c.onclick=()=>{
+          video.src=c.dataset.video;
+          overlay.style.display='flex';
+          video.play();
+          document.getElementById('alert-msg').classList.add('show');
+          setTimeout(()=>document.getElementById('alert-msg').classList.remove('show'),4000);
+        };
+      });
+      overlay.onclick=()=>{overlay.style.display='none';video.pause();video.currentTime=0;};
+
+      /* throttle */
+      let last=0;
+      document.querySelectorAll('.slider-btn').forEach(b=>b.addEventListener('click',e=>{
+        const now=Date.now();if(now-last<300)e.stopImmediatePropagation();else last=now;
+      }));
+    });
+  </script>
+</body>
+</html>
